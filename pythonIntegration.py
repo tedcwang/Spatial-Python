@@ -15,15 +15,15 @@ import zipfile
 from plotnine import ggplot, geom_point, aes
 
 # Read in previous data
-finalData = pd.read_csv("sorData/finalData.csv")
+finalData = pd.read_csv("sourceData/finalData.csv")
 finalData['county_name'] = finalData['county_name'].str.upper()
 
 # Extract GIS data and unzip it
-with zipfile.ZipFile("sorData/NC_Counties.zip","r") as zip_ref:
-    zip_ref.extractall("sorData")
+with zipfile.ZipFile("sourceData/NC_Counties.zip","r") as zip_ref:
+    zip_ref.extractall("sourceData")
 
 # Read in the .shp file with geopandas
-shape = gpd.read_file("sorData/counties.shp")
+shape = gpd.read_file("sourceData/counties.shp")
 shapeData = shape.rename(columns={'CO_NAME':'county_name'})
 # Dropping all the unneeded columns
 shapeData = shapeData.drop(columns=['FID','OBJECTID','PERIMETER',
